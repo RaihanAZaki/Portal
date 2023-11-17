@@ -1,0 +1,19 @@
+
+  /* CSS untuk mengkustomisasi tampilan scroll di Google Chrome */
+  .overflow-y-auto::-webkit-scrollbar {
+    width: 10px; /* Lebar scroll */
+  }
+  .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: #4FD1C5; /* Warna thumb scroll */
+    border-radius: 5px; /* Border radius thumb scroll */
+  }
+  .overflow-y-auto::-webkit-scrollbar-track {
+    background: #F3F3F3; /* Warna track scroll */
+  }
+
+  /* CSS untuk mengkustomisasi tampilan scroll di Firefox */
+  .overflow-y-auto {
+    scrollbar-width: thin;
+    scrollbar-color: #4FD1C5 #F3F3F3; /* Warna thumb dan track scroll */
+  }
+

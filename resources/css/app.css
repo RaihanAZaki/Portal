@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dataTables_length {
+    display: flex;
+    justify-content: space-between;
+}
+.dataTables_wrapper .dataTables_length select {
+    border: 1px solid #aaa;
+    border-radius: 1px;
+    width: 60px;
+    padding: 5px;
+    background-color: transparent;
+    color: inherit;
+    padding: 5px;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: transparent;
+    color: inherit;
+    margin-left: 3px;
+    margin-bottom: 10px;
+}
+
+table.dataTable.display>tbody>tr.odd>.sorting_1, table.dataTable.order-column.stripe>tbody>tr.odd>.sorting_1 {
+    box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.054);
+    box-shadow: inset 0 0 0 9999px rgba(var(--dt-column-ordering), 0.054);
+    text-align: center;
+}
+
+table.dataTable.display>tbody>tr.even>.sorting_1, table.dataTable.order-column.stripe>tbody>tr.even>.sorting_1 {
+    box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.019);
+    box-shadow: inset 0 0 0 9999px rgba(var(--dt-row-selected), 0.019);
+    text-align: center;
+}
+
+table.dataTable {
+    width: 100%;
+    margin: 0 auto;
+    clear: both;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+table.dataTable thead>tr>th.sorting_asc:before, table.dataTable thead>tr>th.sorting_desc:after, table.dataTable thead>tr>td.sorting_asc:before, table.dataTable thead>tr>td.sorting_desc:after {
+    color: #B52544;
+    /* opacity: .6; */
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: inherit !important;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.05);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(230, 230, 230, 0.05)), color-stop(100%, rgba(0, 0, 0, 0.05)));
+    background: -webkit-linear-gradient(top, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    background: -moz-linear-gradient(top, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    background: -ms-linear-gradient(top, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    background: -o-linear-gradient(top, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    background: linear-gradient(to bottom, rgba(230, 230, 230, 0.05) 0%, rgba(0, 0, 0, 0.05) 100%);
+    padding-top: 5px;
+}
+
+.dataTables_wrapper .dataTables_info {
+    clear: both;
+    float: left;
+    padding-top: 5px;
+}
+
+table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_desc, table.dataTable thead>tr>th.sorting_asc_disabled, table.dataTable thead>tr>th.sorting_desc_disabled, table.dataTable thead>tr>td.sorting, table.dataTable thead>tr>td.sorting_asc, table.dataTable thead>tr>td.sorting_desc, table.dataTable thead>tr>td.sorting_asc_disabled, table.dataTable thead>tr>td.sorting_desc_disabled {
+    cursor: pointer;
+    position: relative;
+    padding-right: 26px;
+    text-align: center;
+}
+
+.tox:not([dir=rtl]) {
+    direction: ltr;
+    text-align: left;
+    border-radius: 3px;
+}
+
+    /* CSS untuk mengkustomisasi tampilan scroll di Google Chrome */
+    .overflow-y-auto::-webkit-scrollbar {
+      width: 3px; /* Lebar scroll */
+    }
+    .overflow-y-auto::-webkit-scrollbar-thumb {
+      background: #B52544; /* Warna thumb scroll */
+      border-radius: 5px; /* Border radius thumb scroll */
+      opacity: 0.2;
+    }
+    .overflow-y-auto::-webkit-scrollbar-track {
+      background: #F3F3F3; /* Warna track scroll */
+    }
+  
+    /* CSS untuk mengkustomisasi tampilan scroll di Firefox */
+    .overflow-y-auto {
+      scrollbar-width: thin;
+      scrollbar-color: #4FD1C5 #F3F3F3; /* Warna thumb dan track scroll */
+    }
+
+      /* CSS untuk mengkustomisasi tampilan scroll di Google Chrome */
+      .overflow-x-auto::-webkit-scrollbar {
+      width: 3px; /* Lebar scroll */
+    }
+    .overflow-x-auto::-webkit-scrollbar-thumb {
+      background: #B52544; /* Warna thumb scroll */
+      border-radius: 5px; /* Border radius thumb scroll */
+      opacity: 0.2;
+    }
+    .overflow-x-auto::-webkit-scrollbar-track {
+      background: #F3F3F3; /* Warna track scroll */
+    }
+  
+    /* CSS untuk mengkustomisasi tampilan scroll di Firefox */
+    .overflow-x-auto {
+      scrollbar-width: thin;
+      scrollbar-color: #4FD1C5 #F3F3F3; /* Warna thumb dan track scroll */
+    }
+
+    table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_asc_disabled, table.dataTable thead>tr>th.sorting_desc_disabled, table.dataTable thead>tr>td.sorting, table.dataTable thead>tr>td.sorting_asc, table.dataTable thead>tr>td.sorting_desc, table.dataTable thead>tr>td.sorting_asc_disabled, table.dataTable thead>tr>td.sorting_desc_disabled {
+      cursor: pointer;
+      position: relative;
+      padding-right: 26px;
+      text-align: left;
+  }
+
+  table.dataTable thead > tr > th.sorting_desc {
+    text-align: center;
+  }

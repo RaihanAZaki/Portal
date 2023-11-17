@@ -1,0 +1,72 @@
+version: '4'
+
+services:
+  app:
+    build: .
+    image: portalrapih
+    container_name: portalrapih
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+    working_dir: /home/portal-rapih
+    volumes:
+      - .:/home/portal-rapih
+      - ./storage/php.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - portalrapih
+
+  webserver:
+    image: nginx:alpine
+    container_name: nginxportalrapih
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+    volumes:
+      - .:/home/portal-rapih
+      - ./storage/:/etc/nginx/conf.d/
+    depends_on:
+      - db
+    networks:
+      - portalrapih
+
+  
+  db:
+    image: mysql:5.7
+    container_name: dbportalrapih
+    restart: always
+    tty: true
+    ports:
+      - "20222:3306"
+    volumes:
+      - lbdata:/var/lib/mysql
+    environment:
+      MYSQL_PASSWORD: portalrapih
+      MYSQL_ROOT_PASSWORD: portalrapih
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - portalrapih
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pmaportalrapih
+    links: 
+      - db
+    restart: always
+    ports:
+      - 7000:80
+    networks:
+      - portalrapih
+
+# NETWORK
+networks:
+  portalrapih:
+    driver: bridge
+
+# VOLUME
+volumes:
+  lbdata:
+    driver: local
+
