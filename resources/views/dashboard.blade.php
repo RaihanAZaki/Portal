@@ -12,7 +12,7 @@
 </head>
 <body>
         <x-users.Navbar />
-        <div class="flex justify-center mt-10">
+        <div class="flex justify-center mt-10 mb-10">
             <div class="w-full md:w-4/5">   
 
                 @if (session('session'))
@@ -41,74 +41,74 @@
                 </div>
                 @endif
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="col-span-2 row-span-6 bg-white border border-gray-200 rounded-lg shadow  max-h-[300px]">
-                        <div id="animation-carousel" class="relative w-full" data-carousel="static">
-                            <div class="relative h-96 overflow-hidden rounded-lg">
-                                @foreach ($banner as $data)
-                                    @if ($data->kategori_gambar === 'Dashboard')
-                                        <div class="hidden duration-200 ease-linear" data-carousel-item>
-                                            <img src="{{ asset($data->gambar_banner) }}" alt="Banner Image" class="absolute w-full h-full object-cover">
-                                        </div>
-                                    @endif
-                                @endforeach
-                            </div>
-                            <!-- Slider controls -->
-                            <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30  group-hover:bg-white/50  group-focus:ring-4 group-focus:ring-white  group-focus:outline-none">
-                                    <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                                    </svg>
-                                    <span class="sr-only">Previous</span>
-                                </span>
-                            </button>
-                            <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30  group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                    <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                                    </svg>
-                                    <span class="sr-only">Next</span>
-                                </span>
-                            </button>
-                        </div>
-
-                        <div class="col-span-2 bg-white border border-gray-200 rounded-lg shadow mt-5">
-                            <div class="p-4">
-                                <h2 class="text-2xl font-extrabold text-black-900">Announcements</h2>
-                            </div>
-                            <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 bg-gray-50 dark:text-gray-400" id="announcementTabs" role="tablist">
-                                @for($i = 1; $i <= 5; $i++)
-                                    <li class="mr-2 ml-2">
-                                        <button id="announcement-tab-{{$i}}" data-tabs-target="#announcement-{{$i}}" type="button" role="tab" aria-controls="announcement-{{$i}}" aria-selected="{{$i === 1 ? 'true' : 'false'}}" class="p-4 text-black-600 rounded-tl-lg hover:bg-gray-100">Announcement {{$i}}</button>
-                                    </li>
-                                @endfor
-                            </ul>
-            
-                            <div id="announcementTabContent">
-                                @for($i = 1; $i <= 5; $i++)
-                                    <div class="hidden p-4 bg-white md:p-8" id="announcement-{{$i}}" role="tabpanel" aria-labelledby="announcement-tab-{{$i}}">
-                                        @if (count($announcement) >= $i)
-                                            @php
-                                                $data = $announcement[$i - 1];
-                                            @endphp
-                                            <h2 class="mb-3 text-3xl font-extrabold tracking-tight text-gray-900">{{$data->nama_announcement}}
-                                                <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded ml-3">{{$data->tanggal_posting}}</span>
-                                            </h2>
-                                            <p class="mb-3 text-gray-500 dark:text-gray-400 line-clamp-2">{{Str::limit($data->deskripsi_announcement, 150)}}</p>
-                                            <a data-modal-target="medium-modal" data-modal-toggle="medium-modal" class="inline-flex items-center font-medium text-blue-600 hover:text-blue-800">
-                                                Learn more
-                                                <svg class="w-2.5 h-2.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                                                </svg>
-                                            </a>
-                                        @else
-                                            <div>Not Found</div>
+                        <div class="col-span-2 row-span-6 bg-white border border-gray-200 rounded-lg shadow  max-h-[300px]">
+                            <div id="animation-carousel" class="relative w-full" data-carousel="static">
+                                <div class="relative h-96 overflow-hidden rounded-lg">
+                                    @foreach ($banner as $data)
+                                        @if ($data->kategori_gambar === 'Dashboard')
+                                            <div class="hidden duration-200 ease-linear" data-carousel-item>
+                                                <img src="{{ asset($data->gambar_banner) }}" alt="Banner Image" class="absolute w-full h-full object-cover">
+                                            </div>
                                         @endif
-                                    </div>
-                                @endfor
+                                    @endforeach
+                                </div>
+                                <!-- Slider controls -->
+                                <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30  group-hover:bg-white/50  group-focus:ring-4 group-focus:ring-white  group-focus:outline-none">
+                                        <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                                        </svg>
+                                        <span class="sr-only">Previous</span>
+                                    </span>
+                                </button>
+                                <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30  group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                        <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                        </svg>
+                                        <span class="sr-only">Next</span>
+                                    </span>
+                                </button>
                             </div>
-                        </div>
 
-                        <div class="col-span-2 bg-white border border-gray-200 rounded-lg shadow mt-5">
+                            <div class="col-span-2 bg-white border border-gray-200 rounded-lg shadow mt-5">
+                                <div class="p-4">
+                                    <h2 class="text-2xl font-extrabold text-black-900">Announcements</h2>
+                                </div>
+                                <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 bg-gray-50 dark:text-gray-400" id="announcementTabs" role="tablist">
+                                    @for($i = 1; $i <= 5; $i++)
+                                        <li class="mr-2 ml-2">
+                                            <button id="announcement-tab-{{$i}}" data-tabs-target="#announcement-{{$i}}" type="button" role="tab" aria-controls="announcement-{{$i}}" aria-selected="{{$i === 1 ? 'true' : 'false'}}" class="p-4 text-black-600 rounded-tl-lg hover:bg-gray-100">Announcement {{$i}}</button>
+                                        </li>
+                                    @endfor
+                                </ul>
+                
+                                <div id="announcementTabContent">
+                                    @for($i = 1; $i <= 5; $i++)
+                                        <div class="hidden p-4 bg-white md:p-8" id="announcement-{{$i}}" role="tabpanel" aria-labelledby="announcement-tab-{{$i}}">
+                                            @if (count($announcement) >= $i)
+                                                @php
+                                                    $data = $announcement[$i - 1];
+                                                @endphp
+                                                <h2 class="mb-3 text-3xl font-extrabold tracking-tight text-gray-900">{{$data->nama_announcement}}
+                                                    <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded ml-3">{{$data->tanggal_posting}}</span>
+                                                </h2>
+                                                <p class="mb-3 text-gray-500 dark:text-gray-400 line-clamp-2">{!! Str::limit($data->deskripsi_announcement, 150) !!}</p>
+                                                <a data-modal-target="extralarge-modal{{$data -> id}}" data-modal-toggle="extralarge-modal{{$data -> id}}" class="inline-flex items-center font-medium text-blue-600 hover:text-blue-800">
+                                                    Learn more
+                                                    <svg class="w-2.5 h-2.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                                    </svg>
+                                                </a>
+                                            @else
+                                                <div>Not Found</div>
+                                            @endif
+                                        </div>
+                                    @endfor
+                                </div>
+                            </div>
+
+                        <div class="col-span-2 bg-white border border-gray-200 rounded-lg shadow mt-5 mb-14">
                             <div class="p-2 flex items-center justify-between">
                                 <h2 class="text-2xl font-bold text-black-900">Media Gallery</h2>
                                 <a href="/gallery" class="inline-flex items-center font-medium text-blue-600 hover:text-blue-800">
@@ -164,7 +164,7 @@
                                         <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                                     </svg>
                                 </span>
-                                <a href="{{$item -> url}}" class="flex items-center mb-1 text-md font-semibold text-gray-900  ml-8 hover:underline ">
+                                <a href="#" class="flex items-center mb-1 text-md font-semibold text-gray-900  ml-8 hover:underline ">
                                   NOT FOUND
                                     {{-- <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 ml-3">Latest</span> --}}
                                 </a>
@@ -207,10 +207,20 @@
                         @endforelse
                     </div>
                 </div>
+                
             </div>
         </div>  
-    
+
+        <div class="mt-18 text-white">
+            tes
+        </div>
+
+        @foreach ($announcement as $data)
+        <x-users.Announcement.ModalAnnouncement :data="$data" />
+        @endforeach
+
         <x-users.Footer />
+
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>

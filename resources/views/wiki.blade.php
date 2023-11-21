@@ -50,7 +50,7 @@
                 <div class="col-span-7">
                     <div class="grid gap-x-6 lg:grid-cols-3 p-6">
                         @foreach ($wiki as $data)
-                            <x-users.wiki.CardWiki :data="$data" />
+                            <x-users.Wiki.CardWiki :data="$data" />
                         @endforeach
                     </div>
                 </div>
@@ -59,7 +59,7 @@
         </div>
        
         @foreach ($wiki as $data)
-        <x-users.wiki.ModalWiki :data="$data" />
+        <x-users.Wiki.ModalWiki :data="$data" />
         @endforeach
    </section>
 

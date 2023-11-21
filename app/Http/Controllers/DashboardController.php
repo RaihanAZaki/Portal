@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\announcement;
-use App\Models\article;
+use App\Models\Announcement;
+use App\Models\Article;
 use App\Models\Banner;
 use App\Models\Menu;
 use App\Models\Karyawan;
@@ -47,11 +47,11 @@ class DashboardController extends Controller
 
         $currentDate = Carbon::now();
 
-        $karyawan = karyawan::whereDay('tanggal_join', $currentDate->day)
+        $karyawan = Karyawan::whereDay('tanggal_join', $currentDate->day)
         ->whereMonth('tanggal_join', $currentDate->month)
         ->get();
 
-        $karyawanUlangTahun = karyawan::whereDay('ulang_tahun', $currentDate->day)
+        $karyawanUlangTahun = Karyawan::whereDay('ulang_tahun', $currentDate->day)
         ->whereMonth('ulang_tahun', $currentDate->month)
         ->get();
 
