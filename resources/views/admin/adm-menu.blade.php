@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/table.css') }}">
     @vite(['resources/css/app.css','resources/js/app.js'])
     <link rel="stylesheet" type="text/css" href="../../css/app.css">
-    \    <link rel='icon' href="../MPPA.png">
+   <link rel='icon' href="../MPPA.png">
     
 </head>
 <body>

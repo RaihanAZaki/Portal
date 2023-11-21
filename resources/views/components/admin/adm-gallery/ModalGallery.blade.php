@@ -46,7 +46,7 @@
     </div>
 </div>
 
-<script src="https://cdn.tiny.cloud/1/rpezenrpky2iuyg1rskkwvdal7ac3v8xba5mjchyfywx3eeu/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/y5zre2kt4ni6ioikj8m8ik41l1yodeiuip8a6s3jbdlyvcox/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
   tinymce.init({
     selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE

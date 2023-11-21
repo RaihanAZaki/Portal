@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Models\announcement;
-use App\Models\article;
-use App\Models\menu;
-use App\Models\karyawan;
-use App\Models\wiki;
-use App\Models\gallery;
-use App\Models\banner;
+use App\Models\Announcement;
+use App\Models\Article;
+use App\Models\Menu;
+use App\Models\Karyawan;
+use App\Models\Wiki;
+use App\Models\Gallery;
+use App\Models\Banner;
 use App\Models\User;
 
 class AdminController extends Controller
@@ -34,6 +34,15 @@ class AdminController extends Controller
             // Simpan path yang benar ke dalam basis data
             $requestData["gambar_announcement"] = 'storage/images/' . $fileName;
         }
+         // Unggah file PDF
+         if ($request->hasFile('pdf_announcement')) {
+            $pdfFile = $request->file('pdf_announcement');
+            $pdfFileName = time() . '_' . $pdfFile->getClientOriginalName();
+            $pdfPath = $pdfFile->storeAs('public/pdfs', $pdfFileName);
+    
+            // Simpan path PDF ke dalam basis data
+            $requestData["pdf_announcement"] = 'storage/pdfs/' . $pdfFileName;
+        }
     
         Announcement::create($requestData);
     
@@ -53,8 +62,33 @@ class AdminController extends Controller
 
     public function UpdateAnnouncement($id, Request $request) 
     {
+
+        $data = $request->except(['_token']);
+    
+        if ($request->hasFile('gambar_announcement')) {
+            $file = $request->file('gambar_announcement');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('public/images', $fileName);
+        
+            // Simpan path yang benar ke dalam basis data
+            $data["gambar_announcement"] = 'storage/images/' . $fileName;   
+        }        
+    
+          // Unggah file PDF
+          if ($request->hasFile('pdf_announcement')) {
+            $pdfFile = $request->file('pdf_announcement');
+            $pdfFileName = time() . '_' . $pdfFile->getClientOriginalName();
+            $pdfPath = $pdfFile->storeAs('public/pdfs', $pdfFileName);
+    
+            // Simpan path PDF ke dalam basis data
+            $data["pdf_announcement"] = 'storage/pdfs/' . $pdfFileName;
+        }
+        
         $Announcement = Announcement::find($id);
-        $Announcement -> update($request->except(['_token']));
+        $Announcement->update($data);
+    
+        session()->flash('success', 'Announcement updated successfully');
+
         return redirect('/admin/announcement');
     }
 
@@ -343,11 +377,11 @@ class AdminController extends Controller
 
         $currentDate = Carbon::now();
 
-        $karyawan = karyawan::whereDay('tanggal_join', $currentDate->day)
+        $karyawan = Karyawan::whereDay('tanggal_join', $currentDate->day)
         ->whereMonth('tanggal_join', $currentDate->month)
         ->get();
 
-        $karyawanUlangTahun = karyawan::whereDay('ulang_tahun', $currentDate->day)
+        $karyawanUlangTahun = Karyawan::whereDay('ulang_tahun', $currentDate->day)
             ->whereMonth('ulang_tahun', $currentDate->month)
             ->get();
 
@@ -367,7 +401,7 @@ class AdminController extends Controller
     public function DataUser() {
 
         return view('admin.adm-user', [
-            'user' => user::all()
+            'user' => User::all()
         ]);
     }
 
@@ -416,7 +450,7 @@ class AdminController extends Controller
      public function DataMenu() {
 
         return view('admin.adm-menu', [
-            'menu' => menu::all()
+            'menu' => Menu::all()
         ]);
     }
 
@@ -426,27 +460,27 @@ class AdminController extends Controller
             'nama_menu' => 'required|string',
             'url_menu' => 'required|string',
         ]);
-        menu::create($validatedData);
+        Menu::create($validatedData);
         return redirect('/admin/menu');  
     }
     
     public function EditMenu($id)
     {
-        $menu = menu::find($id);
+        $menu = Menu::find($id);
         return view('admin.adm-menu', compact('menu'));
     }
     
 
     public function UpdateMenu($id, Request $request) 
     {
-        $menu = menu::find($id);
+        $menu = Menu::find($id);
         $menu -> update($request->except(['_token']));
         return redirect('/admin/menu');
     }
 
     public function DestroyMenu($id) 
     {
-        $menu = menu::find($id);
+        $menu = Menu::find($id);
         $menu-> delete();
         return redirect('/admin/menu');
     }

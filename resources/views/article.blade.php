@@ -76,7 +76,7 @@
                 <div class="col-span-7">
                     <div class="grid gap-x-6 lg:grid-cols-3 p-6 ">
                         @foreach ($article as $data)
-                            <x-users.article.CardArticle :data="$data" />
+                            <x-users.Article.CardArticle :data="$data" />
                         @endforeach
                     </div>
                 </div>

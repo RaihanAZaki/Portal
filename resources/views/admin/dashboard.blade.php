@@ -84,8 +84,8 @@
                                                         <h2 class="mb-3 text-3xl font-extrabold tracking-tight text-gray-900">{{$data->nama_announcement}}
                                                             <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded ml-3">{{$data->tanggal_posting}}</span>
                                                         </h2>
-                                                        <p class="mb-3 text-gray-500 dark:text-gray-400 line-clamp-2">{{Str::limit($data->deskripsi_announcement, 150)}}</p>
-                                                        <a data-modal-target="medium-modal" data-modal-toggle="medium-modal" class="inline-flex items-center font-medium text-blue-600 hover:text-blue-800">
+                                                        <p class="mb-3 text-gray-500 dark:text-gray-400 line-clamp-2">{!! Str::limit($data->deskripsi_announcement, 150) !!}</p>
+                                                        <a data-modal-target="extralarge-modal{{$data -> id}}" data-modal-toggle="extralarge-modal{{$data -> id}}" class="inline-flex items-center font-medium text-blue-600 hover:text-blue-800">
                                                             Learn more
                                                             <svg class="w-2.5 h-2.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
@@ -187,6 +187,10 @@
             </div>
         </div>
     </div>
+    @foreach ($announcement as $data)
+    <x-users.Announcement.ModalAnnouncement :data="$data" />
+    @endforeach
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
