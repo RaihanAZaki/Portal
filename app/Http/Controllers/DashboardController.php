@@ -17,7 +17,7 @@ class DashboardController extends Controller
     public function DataAnnouncement() {
 
         return view('announcement', [
-            'announcement' => Announcement::all(),
+            'announcement' => Announcement::orderByDesc('id')->get(),
             'banner' => Banner::all(),
         ]);
     }
@@ -25,14 +25,14 @@ class DashboardController extends Controller
     public function DataArticle() {
 
         return view('article', [
-            'article' => Article::all(),
+            'article' => Article::orderByDesc('id')->get()
         ]);
     }
 
     public function DataWiki() {
 
         return view('wiki', [
-            'wiki' => Wiki::all()
+            'wiki' => Wiki::orderByDesc('id')->get()
         ]);
     }
 
@@ -56,7 +56,7 @@ class DashboardController extends Controller
         ->get();
 
         return view('dashboard', [
-            'announcement' => Announcement::all(),
+            'announcement' => Announcement::orderByDesc('id')->get(),
             'menu' => Menu::all(),
             'karyawan' => $karyawan,
             'karyawanUlangTahun' => $karyawanUlangTahun,

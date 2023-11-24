@@ -85,7 +85,7 @@
         </div>
        
         @foreach ($article as $data)
-        <x-users.article.ModalArticle :data="$data" />
+        <x-users.Article.ModalArticle :data="$data" />
         @endforeach
    </section>
     

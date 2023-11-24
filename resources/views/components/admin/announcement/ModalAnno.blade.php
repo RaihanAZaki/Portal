@@ -34,7 +34,7 @@
                     <div class="mb-3">
                         <label
                           for="formFile"
-                          class="mb-2 inline-block text-black"
+                          class="mb-2 inline-block text-black font-medium"
                           >Upload File Gambar</label
                         >
                         <input
@@ -46,7 +46,7 @@
                       <div class="mb-3">
                         <label
                           for="formFile"
-                          class="mb-2 inline-block text-black"
+                          class="mb-2 inline-block text-black font-medium"
                           >Upload File PDF</label
                         >
                         <input

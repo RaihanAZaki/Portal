@@ -34,6 +34,9 @@ Route::get('/', [DashboardController::class, 'DataDashboard']);
 Route::get('/contact', [ContactController::class, 'DataContact']);
 Route::post('/send-message', [ContactController::class, 'send'])->name('contact.send');
 
+Route::get('/admin/upload', [AdminController::class, 'PageUpload']);
+Route::post('/admin/upload', [AdminController::class, 'import'])->name('csv.import');
+
 // SESI ADMIN
 Route::get('admin/dashboard', [AdminController::class, 'DataDashboard'])->middleware('isLogin');
 

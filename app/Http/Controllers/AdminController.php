@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Import\KaryawanImport;
 use App\Models\Announcement;
 use App\Models\Article;
 use App\Models\Menu;
@@ -12,6 +13,8 @@ use App\Models\Wiki;
 use App\Models\Gallery;
 use App\Models\Banner;
 use App\Models\User;
+use League\Csv\Reader;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -237,7 +240,7 @@ class AdminController extends Controller
     
         session()->flash('success', 'Banner updated successfully');
     
-        return redirect('/admin/Banner');
+        return redirect('/admin/banner');
     }
 
     public function DestroyBanner($id) 
@@ -483,5 +486,41 @@ class AdminController extends Controller
         $menu = Menu::find($id);
         $menu-> delete();
         return redirect('/admin/menu');
+    }
+
+
+    public function PageUpload() {
+
+        return view('admin.adm-karyawan');
+    }
+
+    // public function import()
+    // {
+    //     Excel::import(new KaryawanImport, request()->file('file'));
+
+    //     return redirect()->back()->with('success', 'File Excel berhasil diimpor.');
+    // }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'csv_file' => 'required|mimes:csv,txt,xlsx|max:2048',
+        ]);
+        if ($request->hasFile('csv_file')) {
+            $file = $request->file('csv_file');
+            $filePath = $file->getPathName();
+            $csvData = array_map('str_getcsv', file($filePath));
+            foreach ($csvData as $row) {
+                Karyawan::create([
+                    'nama_karyawan' => $row[0], 
+                    'tanggal_join' => $row[1], 
+                    'divisi_karyawan' => $row[2],
+                    'ulang_tahun' => $row[3],
+                    'jenis_kelamin' => $row[4],
+                ]);
+            }
+            return redirect()->back()->with('success', 'CSV file imported successfully.');
+        }
+        return redirect()->back()->with('error', 'Failed to import CSV file.');
     }
 }
