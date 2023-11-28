@@ -15,6 +15,9 @@ use App\Models\Banner;
 use App\Models\User;
 use League\Csv\Reader;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeEmail;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -65,7 +68,6 @@ class AdminController extends Controller
 
     public function UpdateAnnouncement($id, Request $request) 
     {
-
         $data = $request->except(['_token']);
     
         if ($request->hasFile('gambar_announcement')) {
@@ -112,6 +114,12 @@ class AdminController extends Controller
 
     public function InsertArticle(Request $request)
     {
+
+        $request->validate([
+            'gambar_article' => 'image|mimes:jpeg,png,jpg,gif|max:20480', // Image, 20MB maximum size
+            'pdf_article' => 'file|mimes:pdf|max:10240', // PDF, 10MB maximum size
+        ]);
+
         $data = $request->except(['_token']);
     
         // Unggah gambar article
@@ -151,6 +159,11 @@ class AdminController extends Controller
 
     public function UpdateArticle(Request $request, $id)
     {
+        $request->validate([
+            'gambar_article' => 'image|mimes:jpeg,png,jpg,gif|max:20480', // Image, 20MB maximum size
+            'pdf_article' => 'file|mimes:pdf|max:10240', // PDF, 10MB maximum size
+        ]);
+
         $data = $request->except(['_token']);
     
         if ($request->hasFile('gambar_article')) {
@@ -414,8 +427,13 @@ class AdminController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
         ]);
-        $validatedData['password'] = bcrypt('matahari');
-        User::create($validatedData);
+        $defaultPassword = 'matahari';
+        $validatedData['password'] = bcrypt($defaultPassword);
+        
+        $user = User::create($validatedData);
+
+        Mail::to($user->email)->send(new WelcomeEmail($defaultPassword));
+
         return redirect('/admin/user');  
     }
     
@@ -523,4 +541,18 @@ class AdminController extends Controller
         }
         return redirect()->back()->with('error', 'Failed to import CSV file.');
     }
+
+    public function verifyPassword(Request $request)
+    {
+        $enteredPassword = $request->input('superadmin');
+        $storedHashedPassword = Hash::make('superadmin'); // Replace with your actual password hash
+
+        if (Hash::check($enteredPassword, $storedHashedPassword)) {
+            return response()->json(['status' => 'success']);
+        } else {
+            return response()->json(['status' => 'failure']);
+        }
+    }
+
+  
 }

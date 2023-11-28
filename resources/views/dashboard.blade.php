@@ -15,6 +15,21 @@
         <div class="flex justify-center mt-10 mb-10">
             <div class="w-full md:w-4/5">   
 
+                @if ($errors->any())
+                <div id="sessionMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-5" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+                </div>
+                @endif
+                @if(session()->has('status'))
+                    <div id="sessionMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-5" role="alert">
+                        {{session()->get('status')}}
+                    </div>
+                @endif
+
                 @if (session('session'))
                 <div id="sessionMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-5" role="alert">
                     <strong class="font-bold">Failed!</strong>
@@ -173,14 +188,17 @@
                         </ol>
                     </div>
 
-                    <div class="col-span-1 bg-white border border-gray-200 rounded-lg shadow mt-5" style="max-height: 400px; overflow: auto;">
+                    <div class="col-span-1 bg-white border border-gray-200 rounded-lg shadow mt-5 mb-5 overflow-y-auto h-96" style="max-height: 400px;">
                         <div class="p-4">
                             <h2 class="text-2xl font-bold text-black-900">Work Anniversary</h2>
                         </div>
                         @forelse ($karyawan as $data)
                             <div class="flex items-center space-x-4 ml-4 mb-4">
-                                <img src="{{url('/img/profile.jpg')}}" class="w-10 h-10 rounded-full" alt="">
-                                <div class="font-medium dark:text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                                  </svg>
+                                  
+                                <div class="font-medium">
                                     <div>{{ $data->nama_karyawan }}</div>
                                     <div class="text-sm text-gray-500">{{ date('d M Y', strtotime($data->tanggal_join)) }}</div>
                                 </div>
@@ -190,16 +208,19 @@
                         @endforelse
                     </div>
 
-                    <div class="col-span-1 bg-white border border-gray-200 rounded-lg shadow" style="margin-top: 0px; max-height: 400px; overflow: hidden;">
+                    <div class="col-span-1 bg-white border border-gray-200 rounded-lg shadow overflow-y-auto" style="margin-top: 0px; max-height: 400px;">
                         <div class="p-4">
                             <h2 class="text-2xl font-bold text-black-900">Employee Birthday</h2>
                         </div>
                         @forelse ($karyawanUlangTahun as $data)
-                            <div class="flex items-center space-x-4 ml-4 mb-4">
-                                <img src="{{url('/img/profile.jpg')}}" class="w-10 h-10 rounded-full" alt="">
-                                <div class="font-medium dark:text-white">
+                            <div class="flex items-center space-x-4 ml-4 mb-4 border-b">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                                  </svg>
+                                  
+                                <div class="font-medium">
                                     <div>{{ $data->nama_karyawan }}</div>
-                                    <div class="text-sm text-gray-500 dark:text-gray-400">{{ date('d M Y', strtotime($data->ulang_tahun)) }}</div>
+                                    <div class="text-xs text-gray-500 dark:text-gray-400">{{ $data->divisi_karyawan }}</div>
                                 </div>
                             </div>
                         @empty

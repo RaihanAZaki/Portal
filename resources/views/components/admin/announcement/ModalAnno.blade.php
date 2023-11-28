@@ -54,7 +54,7 @@
                           type="file"
                           id="formFile"
                           name="pdf_announcement" />
-                      </div>
+                    </div>
                 </div>
                 
                 <!-- Modal footer -->

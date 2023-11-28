@@ -17,6 +17,14 @@
             <div class="col-span-1">
                 <x-admin.SidebarAdmin />
             </div>
+            
+            <div class="password-form fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
+                <form class="bg-white p-8 rounded-lg shadow-md">
+                    <label for="password" class="block text-gray-700 font-bold mb-2">Enter Password:</label>
+                    <input type="password" id="password" name="password" class="w-full border-2 border-gray-300 p-2 rounded-md mb-4" required>
+                    <button type="button" id="submitPassword" class="bg-[#B52544] text-white p-2 rounded-md hover:bg-red-500">Submit</button>
+                </form>
+            </div>
 
             <div class="col-span-11 p-3 bg-gray-100">
                 <div class="border-dashed border-2 rounded h-full bg-white overflow-y-auto max-h-[730px]">    
@@ -60,5 +68,25 @@
 
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var passwordForm = document.querySelector('.password-form');
+            var mainContent = document.querySelector('.row');
+            var submitPasswordBtn = document.getElementById('submitPassword');
+            var passwordInput = document.getElementById('password');
+
+            submitPasswordBtn.addEventListener('click', function () {
+                var enteredPassword = passwordInput.value;
+
+                // Replace 'your_password' with the actual password you want to use
+                if (enteredPassword === 'superadmin') {
+                    passwordForm.style.display = 'none';
+                    mainContent.classList.remove('hidden');
+                } else {
+                    alert('Incorrect password. Please try again.');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
